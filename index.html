@@ -1,60 +1,449 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>YOUR_NAME — 学术主页 / Academic Homepage</title>
+  <meta name="description" content="YOUR_NAME 的学术主页：研究领域、论文、教学、开源与联系信息。" />
+  <meta name="keywords" content="YOUR_NAME, 学术主页, 人工智能, 计算机视觉, 学术简历, Publications" />
+  <link rel="canonical" href="https://your-username.github.io/" />
 
-<!DOCTYPE html><html><head><meta name="renderer" content="webkit"><meta http-equiv="X-UA-COMPATIBLE" content="IE=edge,chrome=1"/><title>华侨大学 张洪博--中文主页--首页</title><META Name="keywords" Content="张洪博,Zhang Hongbo" />
-<META Name="description" Content="张洪博,ZHB,华侨大学张洪博,Zhang Hongbo" />
-<META Name="format-detection" Content="telephone=no" />
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="YOUR_NAME — 学术主页" />
+  <meta property="og:description" content="研究领域、代表论文、教学与开源资源。" />
+  <meta property="og:image" content="assets/profile.jpg" />
+  <meta property="og:url" content="https://your-username.github.io/" />
+  <meta name="twitter:card" content="summary" />
 
+  <link rel="icon" href="assets/favicon.ico" />
 
+  <style>
+    /* —— 设计系统（可按需调整） —— */
+    :root {
+      --bg: #ffffff;
+      --text: #101418;
+      --muted: #5f6b7a;
+      --primary: #2156d8;
+      --primary-weak: #e8efff;
+      --card: #f6f8fa;
+      --border: #e6e8eb;
+      --link: #1b52c1;
+      --shadow: 0 10px 25px rgba(16,20,24,.05);
+    }
+    [data-theme="dark"] {
+      --bg: #0b0d10;
+      --text: #e6eaf0;
+      --muted: #9aa6b2;
+      --primary: #6aa7ff;
+      --primary-weak: #10233f;
+      --card: #11161b;
+      --border: #1f2833;
+      --link: #93c1ff;
+      --shadow: 0 10px 25px rgba(0,0,0,.35);
+    }
 
+    /* —— 全局样式 —— */
+    html, body { height: 100%; }
+    body {
+      margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans", "PingFang SC", "Microsoft YaHei", "Apple Color Emoji", "Segoe UI Emoji";
+      background: var(--bg); color: var(--text); line-height: 1.6;
+    }
+    a { color: var(--link); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+    .chip { display:inline-block; padding:.25rem .6rem; border-radius: 999px; background: var(--primary-weak); color: var(--text); border: 1px solid var(--border); margin:.15rem .25rem; font-size:.9rem }
+    .btn { display:inline-flex; align-items:center; gap:.45rem; padding:.6rem .9rem; border-radius: .6rem; border:1px solid var(--border); background: var(--card); box-shadow: var(--shadow); font-weight:600 }
+    .btn:hover { border-color: var(--link); text-decoration: none; }
+    .btn-primary { background: var(--primary); color:#fff; border-color: transparent; }
+    .btn-primary:hover { filter: brightness(0.95); }
+    .muted { color: var(--muted); }
+    .section { padding: 56px 0; border-top: 1px solid var(--border); }
+    .section h2 { margin: 0 0 18px; font-size: 1.6rem; }
+    .card { background: var(--card); border:1px solid var(--border); border-radius: 14px; padding: 18px; box-shadow: var(--shadow); }
 
+    /* —— 顶部导航 —— */
+    header.site-header { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bottom: 1px solid var(--border); backdrop-filter: saturate(1.1) blur(8px); }
+    .nav { display:flex; align-items:center; justify-content:space-between; height:64px; }
+    .nav a { margin: 0 .6rem; font-weight:600; }
+    .theme-toggle { background: transparent; border:1px solid var(--border); border-radius: 12px; padding:.45rem .6rem; cursor:pointer; color: var(--text); }
 
-<meta charset="UTF-8"><link rel="stylesheet" href="/_ts/chmb10/css/style.css">
-<script language="javascript" src="/system/resource/js/jquery/jquery-latest.min.js"></script>
-<script src="/_ts/chmb10/js/jquery.slide.js"></script>
+    /* —— 英雄区 —— */
+    .hero { display:grid; grid-template-columns: 110px 1fr; gap: 20px; padding: 28px 0 8px; align-items:center; }
+    .avatar { width:110px; height:110px; border-radius: 14px; object-fit: cover; border:1px solid var(--border); box-shadow: var(--shadow); background:#ddd }
+    .title { font-size: 1.9rem; line-height: 1.2; margin: 0 0 8px; }
 
-           
+    /* —— 栅格 —— */
+    .grid { display:grid; gap:16px; }
+    .grid-2 { grid-template-columns: 1fr 1fr; }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 80px 1fr; }
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    }
 
+    /* —— 列表与出版物 —— */
+    .news-item { display:flex; gap: 12px; align-items:flex-start; }
+    .news-date { white-space:nowrap; font-variant-numeric: tabular-nums; color: var(--muted); width: 92px; }
+    .pub-list { list-style: none; padding: 0; margin: 0; }
+    .pub-item { padding: 14px; border:1px solid var(--border); border-radius: 12px; margin: 10px 0; background: var(--bg); }
+    .pub-title { font-weight: 700; }
+    .pub-meta { color: var(--muted); font-size: .95rem; }
+    details.bib { margin-top: 8px; }
+    code { background: var(--card); padding: .15rem .35rem; border-radius: 6px; border:1px solid var(--border); }
 
+    /* —— 页脚 —— */
+    footer { padding: 28px 0 56px; border-top:1px solid var(--border); color: var(--muted); font-size:.95rem }
+  </style>
 
+  <!-- JSON-LD 结构化数据（便于学术搜索） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "YOUR_NAME",
+    "jobTitle": "YOUR_TITLE (e.g., Assistant Dean / Associate Professor)",
+    "affiliation": {"@type":"Organization","name":"Huaqiao University"},
+    "email": "mailto:your.name [at] example.edu",
+    "url": "https://your-username.github.io/",
+    "image": "https://your-username.github.io/assets/profile.jpg",
+    "sameAs": [
+      "https://scholar.google.com/citations?user=YOURID",
+      "https://orcid.org/YOUR-ORCID",
+      "https://www.semanticscholar.org/author/YOURID",
+      "https://dblp.org/pid/YOURID",
+      "https://github.com/your-username",
+      "https://x.com/your-handle"
+    ]
+  }
+  </script>
 
+  <!-- 可选：部署后启用统计（例如 G-XXXXXXX）。将下方脚本的 id 替换并取消注释。 -->
+  <!--
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-XXXXXXX');
+  </script>
+  -->
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <nav>
+        <a href="#about">简介</a>
+        <a href="#news">动态</a>
+        <a href="#publications">论文</a>
+        <a href="#teaching">教学</a>
+        <a href="#students">学生</a>
+        <a href="#service">服务</a>
+        <a href="#resources">数据/代码</a>
+        <a href="#contact">联系</a>
+      </nav>
+      <div>
+        <button class="theme-toggle" id="themeToggle" aria-label="切换明暗主题">🌙/☀️</button>
+      </div>
+    </div>
+  </header>
 
-<div class="main">
-<div class="main-box1">
-<div class="main-box1-con">
-<div class="main-box1-con-bt">个人简介</div>
-<div class="main-box1-con-box">
-<p><p style="font-family: 宋体; font-size: 14px; white-space: normal;"><span style="font-family: 宋体, SimSun; font-size: 16px;">张洪博，理学博士，副教授，硕士生导师，主要研究兴趣为计算机视觉、模式识别、图像视频分析，2013年毕业于厦门大学获博士学位，现就职于华侨大学计算机科学与技术学院，任计算机学院党委委员，计算机学院院长助理。CCF协同计算专业委员会执行委员，福建省人工智能学会理事，CCF高级会员，ACM高级会员，IEEE高级会员，中国人工智能学会青年工作委员会委员，厦门市新一代人工智能领域项目评审专家，泉州市高层次人才，福建省高层次人才。主持国家自然科学基金面上项目和青年项目, 福建省自然科学基金面上3项，厦门市自然科学基金面上项目1项，华侨大学优秀科技创新人才和引进人才启动基金项目，参与多项国家自然科学基金，福建省自然学科基金。已在IJCV、IEEE TIP、<span style="font-family: 宋体, SimSun;">ECCV、</span>IEEE TETCI、ACM TOMM、IEEE TAI、<span style="font-family: 宋体, SimSun;">Information Fusion、<span style="font-family: 宋体, SimSun;">EAAI、</span></span>Knowledge-based System、Frontiers of Computer Science等国内外期刊和会议发表40余篇，其中ESI高被引论文1篇，授权发明专利9项，担任多个国际期刊以及国际会议审稿人、BMC Bioinformatics编委。主持并完成福建省本科高校一般教育教学改革研究项目，获得福建省高等教育教学成果奖二等奖，指导学生获得国家级和省部级学科竞赛10多项。</span></p>
-<p style="font-family: 宋体; font-size: 14px; white-space: normal;"><span style="font-family: 宋体, SimSun; font-size: 16px;"><br></span></p>
-<p style="font-family: 宋体; font-size: 14px; white-space: normal;"><span style="font-family: 宋体, SimSun; font-size: 16px;"></span></p>
-<p style="white-space: normal; font-family: 宋体; font-size: 14px;"><span style="font-size: 16px;">研究兴趣：计算机视觉，模式识别、人体姿态和行为分析、图像视频内容理解</span></p>
-<p style="white-space: normal; font-family: 宋体; font-size: 14px;"><span style="font-size: 16px;">联系方式：zhanghongbo@hqu.edu.cn</span></p>
-<p style="font-family: 宋体; font-size: 14px; white-space: normal;"><span style="font-family: 宋体, SimSun; font-size: 16px;">&nbsp; &nbsp; &nbsp; &nbsp;</span><br></p>
-<p style="font-family: 宋体; font-size: 14px; white-space: normal;"><strong><span style="font-family: 宋体, SimSun; font-size: 16px;">一、科研项目&nbsp;</span></strong></p>
-<p style="font-family: 宋体; font-size: 14px; white-space: normal;"><span style="font-family: 宋体, SimSun; font-size: 16px; text-indent: 2em;">（1）智能视频监控中基于多模态融合的人体行为识别研究. 国家自然科学基金面上项目, 项目负责人. 2019.01-2022.12&nbsp;</span></p>
-<p style="font-family: 宋体; font-size: 14px; white-space: normal;"><span style="font-family: 宋体, SimSun; font-size: 16px; text-indent: 2em;">（2）三维空间中基于图结构的人体姿态估计算法研究. 国家自然科学基金青年项目, 项目负责人. 2016.01-2018.12&nbsp;</span></p>
-<p style="font-family: 宋体; font-size: 14px; white-space: normal;"><span style="font-family: 宋体, SimSun; font-size: 16px; text-indent: 2em;">（3）监控场景下面向行为预测的在线分析与人物交互检测算法研究<span style="font-family: 宋体, SimSun; text-indent: 32px;">. 福建省自然科学基金面上项目, 项目负责人. 2025.09-2028.03&nbsp;</span></span></p>
-<p style="font-family: 宋体; font-size: 14px; white-space: normal;"><span style="font-family: 宋体, SimSun; font-size: 16px; text-indent: 2em;">（4）基于三维卷积网络的人体行为特征学习及时序分割算法研究. 福建省自然科学基金面上项目, 项目负责人. 2019.07-2022.06&nbsp;</span></p>
-<p style="font-family: 宋体; font-size: 14px; white-space: normal;"><span style="font-family: 宋体, SimSun; font-size: 16px; text-indent: 2em;">（5）RGBD数据下基于图匹配的人体姿态估计方法研究. 福建省自然科学基金面上项目, 项目负责人. 2015.04-2018.04</span></p>
-<p style="font-family: 宋体; font-size: 14px; white-space: normal;"><span style="font-family: 宋体, SimSun; font-size: 16px; text-indent: 2em;">（6）面向复杂场景的在线行为检测关键算法研究. 厦门市自然科学基金面上项目，项目负责人. 2023.12-2026.06</span></p>
-<p style="font-family: 宋体; font-size: 14px; white-space: normal;"><span style="font-family: 宋体, SimSun; font-size: 16px; text-indent: 2em;">（7）基于深度学习的视频语义分割和场景理解算法研究. 华侨大学优秀青年科研创新人才项目, 项目负责人. 2018.10-2022.09</span><br><span style="font-family: 宋体, SimSun; font-size: 16px; text-indent: 2em;"></span></p>
-<p style="font-family: 宋体; font-size: 14px; white-space: normal;"><strong><span style="font-family: 宋体, SimSun; font-size: 16px;">二、部分</span><span style="font-family: 宋体, SimSun; font-size: 16px;">学术论文&nbsp;</span></strong></p>
-<p style="font-family: 宋体; font-size: 14px; white-space: normal;"><span style="font-size: 16px; font-family: 宋体, SimSun;">1. <strong>Hong-Bo Zhang*</strong>,&nbsp;Wang-Kai Lin, Hang Su, Qing Lei, Jing-Hua Liu, Ji-Xiang Du. Interaction Confidence Attention for Human–Object Interaction Detection. International Journal of Computer Vision.&nbsp;133(8): 5629–5648.(CCF A类，中科院二区, Top期刊, IF: 9.3)&nbsp;</span></p>
-<p style="font-family: 宋体; font-size: 14px; white-space: normal;"><span style="font-family: 宋体, SimSun; font-size: 16px;">2. Wang-Kai Lin, <strong>Hong-Bo Zhang*</strong>, Zongwen Fan, Jing-Hua Liu, Li-Jie Yang, Qing Lei, Jixiang Du, Point-Based Learnable Query Generator for Human-Object Interaction Detection, IEEE Transactions on Image Processing, 2023, 32: 6469-6484. (</span><span style="font-family: 宋体, SimSun; font-size: 16px;">CCF A类,&nbsp;</span><span style="font-family: 宋体, SimSun; font-size: 16px;">中科院一区, Top期刊, IF: 10.8)&nbsp;</span></p>
-<p style="font-family: 宋体; font-size: 14px; white-space: normal;"><span style="font-size: 16px; font-family: 宋体, SimSun;">3. Mingzhe Li,</span><span style="font-size: 16px; font-family: 宋体, SimSun;"> </span><strong><span style="font-size: 16px; font-family: 宋体, SimSun;">Hong-Bo Zhan</span><span style="font-size: 16px; font-family: 宋体, SimSun;">g*</span></strong><span style="font-size: 16px; font-family: 宋体, SimSun;">, Qing Lei, Zongwen Fan, Jinghua Liu, Ji-Xiang Du, Pairwise Contrastive Learning Network for Action Quality Assessment, European Conference on Computer Vision 2022: 457-473. (计算机视觉国际顶级会议, CCF B类)&nbsp;<br></span></p>
-<p style="font-family: 宋体; font-size: 14px; white-space: normal;"><span style="font-size: 16px; font-family: 宋体, SimSun;">4. <strong style="font-family: 宋体, SimSun; white-space: normal;">Hong-Bo Zhang</strong><span style="font-family: 宋体, SimSun;">, Jia-Xin Hong*, Jing-Hua Liu, Qing Lei, Ji-Xiang Du, Images, Normal Maps and Point Clouds Fusion Decoder for 6D Pose Estimation, Information Fusion, 2025, 117: 102907. (中科院一区, Top期刊, IF: 15.5)</span></span></p>
-<p style="font-family: 宋体; font-size: 14px; white-space: normal;"><span style="font-size: 16px; font-family: 宋体, SimSun;">5.&nbsp;<strong style="font-family: 宋体, SimSun; white-space: normal;">Hong-Bo Zhang</strong><span style="font-family: 宋体, SimSun;">, Wei-Xiang Pan, Ji-Xiang Du, Qing Lei*, Yan Chen and Jing-Hua Liu, Adversarial Attention Networks for Early Action Recognition, IEEE Transactions on Emerging Topics in Computational Intelligence, 2025, 9(2): 1581-1594. (中科院二区, IF: 6.5)&nbsp;</span></span></p>
-<p style="font-family: 宋体; font-size: 14px; white-space: normal;"><span style="font-size: 16px; font-family: 宋体, SimSun;"><span style="font-family: 宋体, SimSun;"><span style="font-family: 宋体, SimSun;">6. Qinghongya Shi,&nbsp;</span><strong style="font-family: 宋体, SimSun; white-space: normal;">Hong-Bo Zhang*</strong><span style="font-family: 宋体, SimSun;">, Zhe Li, Ji-Xiang Du, Qing Lei, Jing-Hua Liu, Shuffle-invariant Network for Action Recognition in Videos, ACM Transactions on Multimedia Computing, Communications, and Applications, 2022, 18(3): 69. (中科院三区, IF: 5.1, CCF B类)</span></span></span></p>
-<p style="font-family: 宋体; font-size: 14px; white-space: normal;"><span style="font-size: 16px; font-family: 宋体, SimSun;">7. <strong>Hong-Bo Zhang</strong>, Jia-Yu Liang, Jia-Xin Hong, Qing Lei, Jing-Hua Liu*, Ji-Xiang Du, Spatial and Temporal Consistency Learning for Monocular 6D Pose Estimation, Engineering Applications of Artificial Intelligence, 2024, 131: 107803. (中科院一区, Top期刊, IF: 8.0, CCF C类) </span></p>
-<p style="font-family: 宋体; font-size: 14px; white-space: normal;"><span style="font-size: 16px; font-family: 宋体, SimSun;">8. Jia-Xin Hong, <strong>Hong-Bo Zhang*</strong>, Jing-Hua Liu, et al, A Transformer-based Multi-modal Fusion Network for 6D Pose Estimation, Information Fusion, 2024, 105: 102227. (中科院一区, Top期刊, IF: 15.5) </span></p>
-<p style="font-family: 宋体; font-size: 14px; white-space: normal;"><span style="font-size: 16px; font-family: 宋体, SimSun;">9.&nbsp;</span><strong style="font-family: 宋体, SimSun; font-size: 16px;">Hong-Bo Zhang</strong><span style="font-family: 宋体, SimSun; font-size: 16px;">, Yi-Zhong Zhou, Li-Jia Dong, Qing Lei, Ji-Xiang Du*, Design and Implementation of a Vision- and Grating-Sensor-Based Intelligent Unmanned Settlement System. IEEE Transactions on Artificial Intelligence, 2022, 3(2): 254-264.</span></p>
-<p style="font-family: 宋体; font-size: 14px; white-space: normal;"><span style="font-size: 16px; font-family: 宋体, SimSun;">10. Li-Jia Dong</span><span style="font-size: 16px; font-family: 宋体, SimSun;">, <strong>Hong-Bo Zhang*</strong>, Qinghongya Shi, Qing Lei, Ji-Xiang Du, Shangce Gao, Learning and Fusing Multiple Hidden Substages for Action Quality Assessment, Knowledge-Based Systems, 2021, 229: 107388. (中科院一区, Top期刊, IF: 8.1, CCF C类)</span></p>
-<p style="font-family: 宋体; font-size: 14px; white-space: normal;"><span style="font-size: 16px; font-family: 宋体, SimSun;">11. <strong>Hongbo Zhang*</strong>, Xin Gao, Jixiang Du, Qing Lei, Lijie Yang, Tile Selection Method Based on Error Minimization for Photomosaic Image Creation, Frontiers of Computer Science, 2021, 15(3): 153702. (中科院二区, IF: 2.7, CCF B类, 计算领域高质量科技期刊T1级、中国科技期刊卓越行动计划领军期刊)&nbsp;&nbsp;</span></p>
-<p style="font-family: 宋体; font-size: 14px; white-space: normal;"><span style="font-family: 宋体, SimSun; font-size: 16px;">12. <strong>Hong-Bo Zhang</strong>, Li-Jia Dong et al. Label-Reconstruction-Based Pseudo-subscore Learning for Action Quality Assessment in Sporting Events, Applied Intelligence, 2023,&nbsp;53:10053-10067.&nbsp;(中科院二区, IF: 5.3, CCF C类)</span></p>
-<p><span style="font-family: 宋体, SimSun; font-size: 16px;">13. Hong-Ming Qiu, <strong>Hong-Bo Zhang*</strong>, Qing Lei, et al. Learning referee evaluation and assessing action quality from coarse to fine in diving sport. Neurocomputing, 2025: 130664.&nbsp;(中科院二区, IF: 6.5, CCF C类)</span></p>
-<p><span style="font-family: 宋体, SimSun; font-size: 16px;">14. Ming-Zhe Li, <strong>Hong-Bo Zhang*</strong>, Li-Jia Dong, Qing Lei, Ji-Xiang Du,&nbsp;Gaussian Guided Frame Sequence Encoder Network for Action Quality Assessment, Complex &amp; Intelligent Systems, 2023, 9(2): 1963-1974. (中科院二区, IF: 5.8)</span></p>
-<p><br></p>
-<p style="font-family: 宋体; font-size: 14px; white-space: normal;"><br></p></p></div></div></div>
+  <main class="container">
+    <!-- 英雄区 -->
+    <section class="hero">
+      <img class="avatar" src="assets/profile.jpg" alt="YOUR_NAME 头像" />
+      <div>
+        <h1 class="title">YOUR_NAME <span class="muted">(Ph.D.)</span></h1>
+        <div class="muted">YOUR_TITLE · YOUR_DEPT · <a href="https://www.hqu.edu.cn/" target="_blank" rel="noopener">Huaqiao University</a></div>
+        <div style="margin-top:8px; display:flex; gap:10px; flex-wrap:wrap;">
+          <a class="btn" href="https://scholar.google.com/citations?user=YOURID" target="_blank" rel="noopener" title="Google Scholar">📚 Scholar</a>
+          <a class="btn" href="https://orcid.org/YOUR-ORCID" target="_blank" rel="noopener" title="ORCID">🟢 ORCID</a>
+          <a class="btn" href="https://dblp.org/pid/YOURID" target="_blank" rel="noopener" title="DBLP">📘 DBLP</a>
+          <a class="btn" href="https://github.com/your-username" target="_blank" rel="noopener" title="GitHub">💻 GitHub</a>
+          <a class="btn btn-primary" href="assets/CV_YOUR_NAME.pdf" target="_blank" rel="noopener">下载学术简历（PDF）</a>
+        </div>
+      </div>
+    </section>
 
+    <!-- 简介 -->
+    <section id="about" class="section">
+      <h2>简介 About</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <p>（在此用 3–5 句话介绍您的研究方向与学术经历。例如：我的研究聚焦于 <b>计算机视觉</b> 与 <b>多模态学习</b>，涵盖早期动作识别、在线行为检测、Human–Object Interaction (HOI) 检测以及动作质量评估（AQA）。我关注具身智能与真实世界部署中的可靠性与可解释性问题。）</p>
+          <p>欢迎学术合作、联合指导与企业合作项目。</p>
+          <div>
+            <span class="chip">Early Action Recognition</span>
+            <span class="chip">Online Action Detection</span>
+            <span class="chip">HOI Detection</span>
+            <span class="chip">AQA / Sports AI</span>
+            <span class="chip">Multimodal Learning</span>
+          </div>
+        </div>
+        <div class="card">
+          <ul>
+            <li><b>学位：</b> YOUR_DEGREE, YOUR_UNIVERSITY, YEAR</li>
+            <li><b>邮箱：</b> <span id="email"></span></li>
+            <li><b>办公地址：</b> YOUR_OFFICE_ADDRESS</li>
+            <li><b>开放机会：</b> 招募对 <i>计算机视觉 / 多模态 / 具身智能</i> 感兴趣的本科/硕士/博士生与访问学生。</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
+    <!-- 最新动态 -->
+    <section id="news" class="section">
+      <h2>最新动态 News</h2>
+      <div class="card" id="newsList"><!-- 将由 data/news.json 渲染 --></div>
+    </section>
 
+    <!-- 代表论文 -->
+    <section id="publications" class="section">
+      <h2>代表论文 Selected Publications</h2>
 
-</body></html>
+      <div class="card" style="margin-bottom:12px">
+        <input id="pubFilter" type="search" placeholder="按标题、作者、关键词过滤… (e.g., HOI, AQA)" style="width:100%; padding:.7rem .9rem; border-radius:10px; border:1px solid var(--border); background:var(--bg); color:var(--text)" />
+        <div class="muted" style="margin-top:8px">共 <span id="pubCount">0</span> 篇；✱ 学生作者，★ 通讯作者</div>
+      </div>
+
+      <ol class="pub-list" id="pubList"><!-- 将由 data/publications.json 渲染 --></ol>
+
+      <p class="muted">完整论文列表请见 <a href="https://scholar.google.com/citations?user=YOURID" target="_blank" rel="noopener">Google Scholar</a> 或 <a href="publications.html">publications.html</a>。</p>
+    </section>
+
+    <!-- 教学 -->
+    <section id="teaching" class="section">
+      <h2>教学 Teaching</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>本科课程</h3>
+          <ul>
+            <li>数字图像处理（Digital Image Processing），2024–至今。<a href="#">Syllabus</a> · <a href="#">Slides</a></li>
+            <li>高级程序设计（Advanced Programming），2022–至今。<a href="#">Syllabus</a></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>研究生课程</h3>
+          <ul>
+            <li>计算机视觉与深度学习专题，2023–至今。<a href="#">Syllabus</a></li>
+            <li>多模态表示与小样本学习，2025。<a href="#">Slides</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 学生与合作 -->
+    <section id="students" class="section">
+      <h2>学生与团队 Students</h2>
+      <div class="grid grid-3">
+        <div class="card">
+          <h3>博士生 Ph.D.</h3>
+          <ul>
+            <li>Student A（2023–），研究方向：HOI / AQA</li>
+            <li>Student B（2024–），研究方向：OAD</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>硕士生 M.S.</h3>
+          <ul>
+            <li>Student C✱（2024–），研究方向：EAR</li>
+            <li>Student D✱（2025–），研究方向：多模态</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>校友 Alumni</h3>
+          <ul>
+            <li>Alumni E（2022），去向：ByteDance</li>
+            <li>Alumni F（2023），去向：NIO</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 学术服务 -->
+    <section id="service" class="section">
+      <h2>学术服务 Service</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>程序委员会 / 领域主席</h3>
+          <ul>
+            <li>ACM MM / CVPR / ECCV / AAAI / IJCAI（示例）</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>期刊审稿</h3>
+          <ul>
+            <li>IEEE TPAMI, IJCV, TIP, TMM（示例）</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 数据与代码 / 资源 -->
+    <section id="resources" class="section">
+      <h2>数据与代码 Resources</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>Datasets</h3>
+          <ul>
+            <li>FineSync（AQA-同步跳水） — <a href="#">Homepage</a> · <a href="#">Download</a></li>
+            <li>TASD-2（动作裁判标注） — <a href="#">Homepage</a></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Open-source</h3>
+          <ul>
+            <li>ICSLA（HOI） — <a href="#">Code</a></li>
+            <li>RAPN（AQA） — <a href="#">Code</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 联系方式 -->
+    <section id="contact" class="section">
+      <h2>联系 Contact</h2>
+      <div class="card">
+        <p>电子邮箱：<span id="email2"></span>（请将 [at] 替换为 @）。</p>
+        <p>地址：Huaqiao University, School of Computer Science & Software Engineering, Quanzhou/Xiamen, Fujian, China.</p>
+        <p class="muted">页面最后更新：<span id="lastUpdated"></span></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div>© <span id="year"></span> YOUR_NAME. 内容除特别声明外采用 <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY‑NC 4.0</a> 许可。</div>
+      <div>本页为单文件 <code>index.html</code>，适配 GitHub Pages，支持暗色模式与论文过滤。</div>
+    </div>
+  </footer>
+  <!-- 可选：内置回退数据，若 data/*.json 不存在将使用此处示例（部署后请删除或更新） -->
+  <script type="application/json" id="newsData">[
+    {"date":"2025-11-05","text":"网站上线初版 🎉"},
+    {"date":"2025-10-12","text":"论文《Paper Title》被 Journal/Conference 录用"},
+    {"date":"2025-09-01","text":"招募 2026 春季入学研究生与科研助理"}
+  ]</script>
+  <script type="application/json" id="pubData">[
+    {
+      "title":"ICSLA: Confidence-guided Attention for Human–Object Interaction within the TOS Framework",
+      "authors":"A. First✱, B. Second, YOUR_NAME★",
+      "venue":"IEEE TPAMI",
+      "year":2025,
+      "tags":["HOI","attention","transformer"],
+      "links":{"pdf":"#","code":"#","project":"#","dataset":"#"},
+      "bibtex":"@article{your2025icsla, title={ICSLA: Confidence-guided Attention for Human–Object Interaction within the TOS Framework}, author={First, A. and Second, B. and YOUR_NAME}, journal={IEEE TPAMI}, year={2025}}"
+    },
+    {
+      "title":"RAPN: Referee-Aware Parsing Network for Fine-grained Action Quality Assessment",
+      "authors":"C. Third✱, YOUR_NAME★, D. Fourth",
+      "venue":"NeurIPS",
+      "year":2025,
+      "tags":["AQA","diving","transformer"],
+      "links":{"pdf":"#","code":"#","project":"#"},
+      "bibtex":"@inproceedings{your2025rapn, title={RAPN: Referee-Aware Parsing Network for Fine-grained Action Quality Assessment}, author={Third, C. and YOUR_NAME and Fourth, D.}, booktitle={NeurIPS}, year={2025}}"
+    }
+  ]</script>
+
+  <script>
+    // —— 主题切换 ——
+    const themeToggle = document.getElementById('themeToggle');
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
+    themeToggle?.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
+
+    // —— 邮箱反爬虫展示（修改下方用户名与域名） ——
+    const user = 'your.name';
+    const domain = 'example.edu';
+    const emailStr = user + ' [at] ' + domain;
+    const emailHTML = '<a href="mailto:' + user + '@' + domain + '">' + emailStr + '</a>';
+    document.getElementById('email').innerHTML = emailHTML;
+    document.getElementById('email2').innerHTML = emailHTML;
+
+    // —— 数据加载工具（带回退） ——
+    async function loadJSON(path){
+      const r = await fetch(path, { cache: 'no-store' });
+      if(!r.ok) throw new Error('HTTP '+r.status);
+      return r.json();
+    }
+    async function loadJSONWithFallback(path, fallbackId){
+      try { return await loadJSON(path); }
+      catch(err){
+        try {
+          const txt = document.getElementById(fallbackId)?.textContent?.trim();
+          if (txt) return JSON.parse(txt);
+        } catch(e) {}
+        return [];
+      }
+    }
+
+    // —— 渲染 News ——
+    function renderNews(items){
+      const box = document.getElementById('newsList');
+      if(!box) return;
+      box.innerHTML = items.map(i => `
+        <div class="news-item">
+          <div class="news-date">${i.date}</div>
+          <div>${i.text}</div>
+        </div>`).join('');
+    }
+
+    // —— 渲染 Publications（含过滤） ——
+    function renderPubs(pubs){
+      const list = document.getElementById('pubList');
+      const filter = document.getElementById('pubFilter');
+      const count = document.getElementById('pubCount');
+      if(!list) return;
+
+      list.innerHTML = pubs.map(p => `
+        <li class="pub-item" data-keywords="${(p.tags||[]).join(' ').toLowerCase()}">
+          <div class="pub-title">${p.title}</div>
+          <div class="pub-meta">${p.authors}. <i>${p.venue}</i>, ${p.year}.</div>
+          <div style="margin-top:6px; display:flex; gap:8px; flex-wrap:wrap">
+            ${p.links?.pdf ? `<a class="btn" href="${p.links.pdf}" target="_blank" rel="noopener">PDF</a>`:''}
+            ${p.links?.code ? `<a class="btn" href="${p.links.code}" target="_blank" rel="noopener">Code</a>`:''}
+            ${p.links?.project ? `<a class="btn" href="${p.links.project}" target="_blank" rel="noopener">Project</a>`:''}
+            ${p.links?.dataset ? `<a class="btn" href="${p.links.dataset}" target="_blank" rel="noopener">Dataset</a>`:''}
+          </div>
+          ${p.bibtex ? `<details class="bib"><summary>BibTeX</summary><pre>${p.bibtex}</pre></details>`:''}
+        </li>`).join('');
+
+      const liNodes = Array.from(list.querySelectorAll('.pub-item'));
+      function apply(){
+        const q = (filter?.value || '').trim().toLowerCase();
+        let n = 0;
+        liNodes.forEach(li => {
+          const text = li.innerText.toLowerCase();
+          const keys = (li.getAttribute('data-keywords')||'').toLowerCase();
+          const show = !q || text.includes(q) || keys.includes(q);
+          li.style.display = show ? '' : 'none';
+          if (show) n++;
+        });
+        if(count) count.textContent = n;
+      }
+      if(filter){
+        filter.removeEventListener('input', filter._applyHandler || (()=>{}));
+        filter._applyHandler = apply;
+        filter.addEventListener('input', apply);
+      }
+      apply();
+    }
+
+    // —— 加载数据并渲染 ——
+    (async ()=>{
+      const news = await loadJSONWithFallback('data/news.json', 'newsData');
+      renderNews(news);
+      const pubs = await loadJSONWithFallback('data/publications.json', 'pubData');
+      renderPubs(pubs);
+    })();
+
+    // —— 页脚年份与最后更新 ——
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const lm = new Date(document.lastModified);
+    const fmt = (d)=> d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+    document.getElementById('lastUpdated').textContent = fmt(lm);
+  </script>
+</body>
+</html>
