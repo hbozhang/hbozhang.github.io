@@ -1,0 +1,20 @@
+[
+  {
+    "title": "ICSLA: Confidence-guided Attention for Human–Object Interaction within the TOS Framework",
+    "authors": "A. First✱, B. Second, YOUR_NAME★",
+    "venue": "IEEE TPAMI",
+    "year": 2025,
+    "tags": ["HOI","attention","transformer"],
+    "links": {"pdf":"#","code":"#","project":"#","dataset":"#"},
+    "bibtex": "@article{your2025icsla, ... }"
+  },
+  {
+    "title": "RAPN: Referee-Aware Parsing Network for Fine-grained Action Quality Assessment",
+    "authors": "C. Third✱, YOUR_NAME★, D. Fourth",
+    "venue": "NeurIPS",
+    "year": 2025,
+    "tags": ["AQA","diving","transformer"],
+    "links": {"pdf":"#","code":"#","project":"#"},
+    "bibtex": "@inproceedings{your2025rapn, ... }"
+  }
+]
